@@ -1,9 +1,15 @@
 <template>
   <div>
     <input v-model="userInput" @keypress.enter="input" type="text">
+    
+    <div v-if="results.length > 0">
+      <iframe :src="`https://www.youtube.com/embed/${results[0].id.videoId}`"></iframe>
+    </div>
+
     <ul>
       <li v-for="result in results" :key="result.id.videoId">
         {{ result.snippet.title }}
+        <img :src="result.snippet.thumbnails.default.url">
       </li>
     </ul>
   </div>
@@ -24,7 +30,7 @@ export default {
     input() {
       // 1. 입력된 검색어를 가지고,
       const baseURL = 'https://www.googleapis.com/youtube/v3/search'
-      const API_KEY = '본인의 API_KEY'
+      const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
 
       // 2. Youtube API에 요청을 보내어
       axios.get(baseURL, {
@@ -33,7 +39,8 @@ export default {
           key: API_KEY,
           part: 'snippet',
           type: 'video',
-          q: this.userInput
+          q: this.userInput,
+          maxResults: 10
         }
       })
         .then(response => {
