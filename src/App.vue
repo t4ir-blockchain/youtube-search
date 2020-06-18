@@ -31,12 +31,6 @@ export default {
     VideoPlayer,
     VideoList
   },
-  data() {
-    return {
-      videos: [],
-      selectedVideo: null
-    }
-  },
   methods: {
     getVideos(userInput) {
       // 1. 입력된 검색어를 가지고,

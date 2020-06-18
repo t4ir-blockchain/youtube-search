@@ -8,14 +8,15 @@
 
 <script>
 import VideoItem from './VideoItem.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'VideoList',
   components: {
     VideoItem
   },
-  props: {
-    videos: Array
+  computed: {
+    ...mapGetters(['videos'])
   },
   methods: {
     imageClicked(video) {

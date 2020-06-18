@@ -2,6 +2,7 @@
   <div>
     <img @click="imageClicked" :src="video.snippet.thumbnails.default.url">
     <h5>{{ video.snippet.title }}</h5>
+
   </div>
 </template>
 
